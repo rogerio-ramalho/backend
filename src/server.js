@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+
 io.on('connection', socket =>{
     socket.on('connectRoom', box =>{
         socket.join(box);
@@ -30,6 +31,4 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')));
 
 app.use(require('./routes'));
 
-server.listen(3333);
-
-//01:02:30
+server.listen(process.env.PORT || 3333);
